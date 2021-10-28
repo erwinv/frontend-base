@@ -4,7 +4,7 @@ import Head from 'next/head'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
 import { CacheProvider, EmotionCache } from '@emotion/react'
-import { Box, AppBar, Toolbar } from '@mui/material'
+import { Box, AppBar, Toolbar, Container } from '@mui/material'
 import theme from '../styles/theme'
 import cache from '../styles/cache'
 import Drawer, { drawerWidth } from '../components/drawer'
@@ -28,7 +28,21 @@ function MyApp({ Component: Page, pageProps, emotionCache }: MyAppProps) {
             sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
           >
             <Toolbar>
-              <Link href='/'>Home</Link>
+              <Box sx={{ flexGrow: 1 }} />
+              <Link
+                href='/'
+                underline='none'
+              >Home</Link>
+              <Link
+                href='/howto'
+                underline='none'
+                sx={{ pl: 3 }}
+              >Guides</Link>
+              <Link
+                href='/docs'
+                underline='none'
+                sx={{ pl: 3 }}
+              >Docs</Link>
             </Toolbar>
           </AppBar>
           <Drawer menu={[
