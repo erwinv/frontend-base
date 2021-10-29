@@ -25,13 +25,11 @@ function MyApp({ Component: Page, pageProps, emotionCache }: MyAppProps) {
     ['/howto', 'Guides'],
     ['/docs', 'Docs'],
   ].map(([pathname, label]) => (
-    <>
-      <Button
-        color='inherit'
-        component={NextLinkComposed}
-        to={{ pathname }}
-      >{label}</Button>
-    </>
+    <Button key={label}
+      color='inherit'
+      component={NextLinkComposed}
+      to={{ pathname }}
+    >{label}</Button>
   ))
 
   const drawerMenu = [
