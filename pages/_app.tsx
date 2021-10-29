@@ -18,7 +18,7 @@ interface MyAppProps extends AppProps {
 }
 
 function MyApp({ Component: Page, pageProps, emotionCache }: MyAppProps) {
-  const [isDarkMode, setDarkMode] = useState(false)
+  const [isDarkMode, setDarkMode] = useState(true)
 
   const buttonLinks = [
     ['/', 'Home'],
@@ -45,16 +45,16 @@ function MyApp({ Component: Page, pageProps, emotionCache }: MyAppProps) {
       </Head>
       <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
         <CssBaseline />
+        <AppBar
+          position='sticky'
+          sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+        >
+          <Toolbar>
+            <Box sx={{ flexGrow: 1 }} />
+            {buttonLinks}
+          </Toolbar>
+        </AppBar>
         <Box sx={{ display: 'flex' }}>
-          <AppBar
-            position='fixed'
-            sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-          >
-            <Toolbar>
-              <Box sx={{ flexGrow: 1 }} />
-              {buttonLinks}
-            </Toolbar>
-          </AppBar>
           <Drawer menu={drawerMenu}>
             <Switch
               checked={isDarkMode}
@@ -65,7 +65,6 @@ function MyApp({ Component: Page, pageProps, emotionCache }: MyAppProps) {
             component='main'
             sx={{ flexGrow: 1 }}
           >
-            <Toolbar />
             <Page {...pageProps} />
           </Box>
         </Box>

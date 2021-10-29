@@ -23,6 +23,12 @@ const Home: NextPage<HomeProps> = ({ message: initialMessage }) => {
       .then(({ message }) => {
         setMessage(message)
       })
+      .catch((e) => {
+        const isAbortError = e instanceof DOMException && e.name === 'AbortError'
+        if (!isAbortError) {
+          throw e
+        }
+      })
 
     return () => {
       abortCtrl.abort()
