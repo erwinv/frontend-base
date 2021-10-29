@@ -1,6 +1,6 @@
 import createCache from '@emotion/cache'
 
-export default  createCache({
+export default createCache({
   key: 'css',
   prepend: true
 })

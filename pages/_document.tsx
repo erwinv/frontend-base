@@ -7,7 +7,7 @@ import Document, {
   NextScript,
 } from 'next/document'
 import createEmotionServer from '@emotion/server/create-instance'
-import theme from '../styles/theme'
+import defaultTheme from '../styles/theme'
 import cache from '../styles/cache'
 
 const { extractCriticalToChunks } = createEmotionServer(cache)
@@ -43,7 +43,7 @@ export default class MyDocument<P> extends Document<P> {
     return (
       <Html lang="en">
         <Head>
-          <meta name="theme-color" content={theme.palette.primary.main} />
+          <meta name="theme-color" content={defaultTheme.palette.primary.main} />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
         </Head>
         <body>
