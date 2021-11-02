@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -10,15 +10,13 @@ import cache from '../styles/cache'
 import Drawer, { drawerWidth } from '../components/drawer'
 import { NextLinkComposed } from '../components/link'
 
-const lightTheme = createTheme('light')
-const darkTheme = createTheme('dark')
-
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache
 }
 
 function MyApp({ Component: Page, pageProps, emotionCache }: MyAppProps) {
-  const [isDarkMode, setDarkMode] = useState(true)
+  const [isDarkMode, setDarkMode] = useState(false)
+  const theme = useMemo(() => createTheme(isDarkMode ? 'dark' : 'light'), [isDarkMode])
 
   const buttonLinks = [
     ['/', 'Home'],
@@ -41,20 +39,29 @@ function MyApp({ Component: Page, pageProps, emotionCache }: MyAppProps) {
   return (
     <CacheProvider value={emotionCache ?? cache}>
       <Head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <meta name='viewport' content='initial-scale=1, width=device-width' />
       </Head>
-      <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         <AppBar
           position='sticky'
-          sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+          sx={{
+            width: { sm: `calc(100% - ${drawerWidth}px)` },
+            ml: { sm: `${drawerWidth}px` },
+          }}
         >
           <Toolbar>
             <Box sx={{ flexGrow: 1 }} />
             {buttonLinks}
           </Toolbar>
         </AppBar>
-        <Box sx={{ display: 'flex' }}>
+        <Box
+          sx={{
+            width: { sm: `calc(100% - ${drawerWidth}px)` },
+            ml: { sm: `${drawerWidth}px` },
+            display: 'flex',
+          }}
+        >
           <Drawer menu={drawerMenu}>
             <Switch
               checked={isDarkMode}
