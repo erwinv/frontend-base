@@ -3,6 +3,7 @@ import {
   AppBar,
   Box,
   Button,
+  Container,
   Toolbar,
 } from '@mui/material'
 import { NextLinkComposed } from '../link'
@@ -21,21 +22,24 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ themeSwitch, children }) => {
     >{label}</Button>
   ))
 
+  const contentWidth = 'lg'
+
   return (
     <>
-      <AppBar
-        position='sticky'
-      >
-        <Toolbar>
-          <Box sx={{ flexGrow: 1 }} />
-          {topNavLinks}
-        </Toolbar>
+      <AppBar position='sticky'>
+        <Container maxWidth={contentWidth}>
+          <Toolbar>
+            {themeSwitch}
+            <Box sx={{ flexGrow: 1 }} />
+            {topNavLinks}
+          </Toolbar>
+        </Container>
       </AppBar>
-      <Box
-        component='main'
-      >
-        {children}
-      </Box>
+      <Container maxWidth={contentWidth}>
+        <Box component='main'>
+          {children}
+        </Box>
+      </Container>
     </>
   )
 }
