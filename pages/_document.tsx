@@ -9,6 +9,7 @@ import Document, {
 import createEmotionServer from '@emotion/server/create-instance'
 import defaultTheme from '../styles/theme'
 import cache from '../styles/cache'
+import { MyAppType } from './_app'
 
 const { extractCriticalToChunks } = createEmotionServer(cache)
 
@@ -17,7 +18,12 @@ export default class MyDocument<P> extends Document<P> {
     const originalRenderPage = ctx.renderPage
     ctx.renderPage = () =>
       originalRenderPage({
-        enhanceApp: (App: any) => props => <App emotionCache={cache} {...props} />,
+        enhanceApp: (MyApp: MyAppType) => {
+          const EnhancedApp: MyAppType = (props) => (
+            <MyApp emotionCache={cache} {...props} />
+          )
+          return EnhancedApp
+        },
       })
 
     const initialProps = await super.getInitialProps(ctx)

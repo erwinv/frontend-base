@@ -4,10 +4,18 @@ import Head from 'next/head'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
 import { CacheProvider, EmotionCache } from '@emotion/react'
-import { Box, AppBar, Toolbar, Button, Switch } from '@mui/material'
+import {
+  AppBar,
+  Box,
+  Button,
+  IconButton,
+  Switch,
+  Toolbar,
+} from '@mui/material'
+import { Menu as MenuIcon } from '@mui/icons-material'
 import { createTheme } from '../styles/theme'
 import cache from '../styles/cache'
-import Drawer, { drawerWidth } from '../components/drawer'
+import AppDrawer, { useDrawer } from '../components/drawer'
 import { NextLinkComposed } from '../components/link'
 
 interface MyAppProps extends AppProps {
@@ -17,6 +25,8 @@ interface MyAppProps extends AppProps {
 function MyApp({ Component: Page, pageProps, emotionCache }: MyAppProps) {
   const [isDarkMode, setDarkMode] = useState(false)
   const theme = useMemo(() => createTheme(isDarkMode ? 'dark' : 'light'), [isDarkMode])
+  
+  const drawerProps = useDrawer()
 
   const buttonLinks = [
     ['/', 'Home'],
@@ -46,28 +56,39 @@ function MyApp({ Component: Page, pageProps, emotionCache }: MyAppProps) {
         <AppBar
           position='sticky'
           sx={{
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
-            ml: { sm: `${drawerWidth}px` },
+            width: { sm: `calc(100% - ${drawerProps.width}px)` },
+            ml: { sm: `${drawerProps.width}px` },
           }}
         >
           <Toolbar>
+            <IconButton
+              color='inherit'
+              onClick={() => drawerProps.setOpen(true)}
+              edge='start'
+              sx={{
+                mr: 2,
+                display: { sm: 'none' },
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
             <Box sx={{ flexGrow: 1 }} />
             {buttonLinks}
           </Toolbar>
         </AppBar>
         <Box
           sx={{
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
-            ml: { sm: `${drawerWidth}px` },
+            width: { sm: `calc(100% - ${drawerProps.width}px)` },
+            ml: { sm: `${drawerProps.width}px` },
             display: 'flex',
           }}
         >
-          <Drawer menu={drawerMenu}>
+          <AppDrawer menu={drawerMenu} {...drawerProps}>
             <Switch
               checked={isDarkMode}
               onChange={(_, isDarkMode) => setDarkMode(isDarkMode)}
             />
-          </Drawer>
+          </AppDrawer>
           <Box
             component='main'
             sx={{ flexGrow: 1 }}
@@ -80,4 +101,5 @@ function MyApp({ Component: Page, pageProps, emotionCache }: MyAppProps) {
   )
 }
 
+export type MyAppType = typeof MyApp
 export default MyApp
