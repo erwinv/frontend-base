@@ -4,11 +4,13 @@ import {
   Container,
   Typography,
 } from '@mui/material'
+import { MyPage } from './_app'
+import { DocsLayout } from '../components/layout'
 
 interface GuidesProps {
 }
 
-const Guides: NextPage<GuidesProps> = ({ }) => {
+const Guides: MyPage<GuidesProps> = ({ }) => {
   return (
     <>
       <Head>
@@ -21,5 +23,7 @@ const Guides: NextPage<GuidesProps> = ({ }) => {
     </>
   )
 }
+
+Guides.Layout = DocsLayout
 
 export default Guides

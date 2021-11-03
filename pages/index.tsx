@@ -5,35 +5,16 @@ import {
   Container,
   Typography,
 } from '@mui/material'
+import useFetch from '../hooks/useFetch'
+import { MyPage } from './_app'
+import { HomeLayout } from '../components/layout'
 
 interface HomeProps {
   message: string
 }
 
-const Home: NextPage<HomeProps> = ({ message: initialMessage }) => {
-  const [message, setMessage] = React.useState(initialMessage)
-
-  React.useEffect(() => {
-    const abortCtrl = new AbortController()
-
-    fetch('/api/hello', {
-      signal: abortCtrl.signal
-    })
-      .then(res => res.json())
-      .then(({ message }) => {
-        setMessage(message)
-      })
-      .catch((e) => {
-        const isAbortError = e instanceof DOMException && e.name === 'AbortError'
-        if (!isAbortError) {
-          throw e
-        }
-      })
-
-    return () => {
-      abortCtrl.abort()
-    }
-  }, [])
+const Home: MyPage<HomeProps> = ({ message: initialMessage }) => {
+  const { data } = useFetch<HomeProps>('/api/hello')
 
   return (
     <>
@@ -42,13 +23,11 @@ const Home: NextPage<HomeProps> = ({ message: initialMessage }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Container maxWidth='lg'>
-        <Typography variant='h3'>{message}</Typography>
+        <Typography variant='h3'>{data?.message ?? initialMessage}</Typography>
       </Container>
     </>
   )
 }
-
-export default Home
 
 export const getStaticProps: GetStaticProps<HomeProps> = async (context) => {
   return {
@@ -57,3 +36,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async (context) => {
     },
   }
 }
+
+Home.Layout = HomeLayout
+
+export default Home

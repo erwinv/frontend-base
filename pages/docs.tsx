@@ -1,14 +1,15 @@
-import { NextPage } from 'next'
 import Head from 'next/head'
 import {
   Container,
   Typography,
 } from '@mui/material'
+import { MyPage } from './_app'
+import { DocsLayout } from '../components/layout'
 
 interface DocsProps {
 }
 
-const Docs: NextPage<DocsProps> = ({ }) => {
+const Docs: MyPage<DocsProps> = ({ }) => {
   return (
     <>
       <Head>
@@ -21,5 +22,7 @@ const Docs: NextPage<DocsProps> = ({ }) => {
     </>
   )
 }
+
+Docs.Layout = DocsLayout
 
 export default Docs

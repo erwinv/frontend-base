@@ -49,7 +49,7 @@ const NavMenuItem: React.FC<NavSubMenuProps> = ({ menuItem }) => {
       {hasSubMenu && (
         <Collapse in={open} unmountOnExit>
           <List component='div' disablePadding>
-            {menuItem.subMenu.map(menuItem => (
+            {menuItem.subMenu!.map(menuItem => (
               <ListItemButton key={kebabCase(menuItem.title)} sx={{ pl: 4 }}>
                 <ListItemText primary={menuItem.title} />
               </ListItemButton>
