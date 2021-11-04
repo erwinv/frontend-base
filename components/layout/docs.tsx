@@ -3,6 +3,7 @@ import {
   AppBar,
   Box,
   Button,
+  Container,
   IconButton,
   Toolbar,
 } from '@mui/material'
@@ -30,47 +31,50 @@ const DocsLayout: LayoutType = ({ themeSwitch, children }) => {
     { title: 'baz' },
   ]
 
+  const contentWidth = 'xl'
+
   return (
     <>
       <AppBar
-        position='sticky'
+        position='static'
         sx={{
           width: { sm: `calc(100% - ${drawerProps.width}px)` },
           ml: { sm: `${drawerProps.width}px` },
         }}
       >
-        <Toolbar>
-          <IconButton
-            color='inherit'
-            onClick={() => drawerProps.setOpen(true)}
-            edge='start'
-            sx={{
-              display: { sm: 'none' },
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Box sx={{ flexGrow: 1 }} />
-          {topNavLinks}
-        </Toolbar>
+        <Container maxWidth={contentWidth}>
+          <Toolbar>
+            <IconButton
+              color='inherit'
+              onClick={() => drawerProps.setOpen(true)}
+              edge='start'
+              sx={{
+                display: { sm: 'none' },
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Box sx={{ flexGrow: 1 }} />
+            {topNavLinks}
+          </Toolbar>
+        </Container>
       </AppBar>
+      <AppDrawer menu={sideNavMenu} {...drawerProps}>
+        {themeSwitch}
+      </AppDrawer>
       <Box
         sx={{
           width: { sm: `calc(100% - ${drawerProps.width}px)` },
           ml: { sm: `${drawerProps.width}px` },
-          display: 'flex',
         }}
       >
-        <AppDrawer menu={sideNavMenu} {...drawerProps}>
-          {themeSwitch}
-        </AppDrawer>
-        <Box
-          component='main'
-          sx={{ flexGrow: 1 }}
-        >
-          {children}
-        </Box>
+        <Container maxWidth={contentWidth}>
+          <Box component='main'>
+            {children}
+          </Box>
+        </Container>
       </Box>
+      {/* <Button /> // back-to-top */}
     </>
   )
 }
