@@ -36,11 +36,11 @@ const Docs: MyPage<DocsProps> = ({ docs }) => {
         spacing={4}
         divider={<Divider variant='middle' />}
       >
-        {docs.map(({ title, contentLeft, contentRight}) => (
+        {docs.map(({title, contentLeft, contentRight}, i) => (
           <Stack
-            key={title.split(/\s/).join('-')}
-            direction='row'
-            spacing={4}
+            key={`${i}${title.split(/\s/).join('-')}`}
+            direction={{ xs: 'column', lg: 'row' }}
+            spacing={{ xs: 2, lg: 4 }}
           >
             <Container>
               <Typography variant='h5' gutterBottom>{title}</Typography>
@@ -50,9 +50,9 @@ const Docs: MyPage<DocsProps> = ({ docs }) => {
             </Container>
             <Container
               sx={{
-                position: 'sticky',
+                position: { xs: 'static', lg: 'sticky' },
                 top: theme => theme.spacing(2),
-                alignSelf: 'flex-start'
+                alignSelf: { xs: 'auto', lg: 'flex-start' },
               }}
             >
               <Stack spacing={2}>

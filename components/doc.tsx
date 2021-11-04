@@ -39,7 +39,15 @@ const Doc: React.FC<DocProps> = ({ doc }) => {
       <Card raised>
         <CardHeader subheader={doc.method + ' ' + doc.path} />
         <CardContent>
-          <pre>{doc.code}</pre>
+          <Typography component='div'>
+            <Box
+              sx={{ fontFamily: 'monospace' }}
+              whiteSpace='pre'
+              overflow='auto'
+            >
+              {doc.code}
+            </Box>
+          </Typography>
         </CardContent>
       </Card>
     )
@@ -50,7 +58,15 @@ const Doc: React.FC<DocProps> = ({ doc }) => {
       <Card raised>
         <CardHeader subheader='Response' />
         <CardContent>
-          <pre>{doc.code}</pre>
+          <Typography component='div'>
+            <Box
+              sx={{ fontFamily: 'monospace' }}
+              whiteSpace='pre'
+              overflow='auto'
+            >
+              {doc.code}
+            </Box>
+          </Typography>
         </CardContent>
       </Card>
     )

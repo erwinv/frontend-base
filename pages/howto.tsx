@@ -18,7 +18,12 @@ const Guides: MyPage<GuidesProps> = ({ }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Container>
-        <Typography variant='h3'>Guides</Typography>
+        <Typography
+          variant='h3'
+          mt={2}
+        >
+          Guides
+        </Typography>
       </Container>
     </>
   )

@@ -20,7 +20,13 @@ const Home: MyPage<HomeProps> = ({ title, content }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Container maxWidth='lg'>
-        <Typography variant='h3'>{title}</Typography>
+        <Typography
+          variant='h3'
+          mt={2}
+          gutterBottom
+        >
+          {title}
+        </Typography>
         {content.map((paragraph, i) => (
           <Typography
             key={`${i}`}
