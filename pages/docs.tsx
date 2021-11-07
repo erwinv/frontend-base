@@ -2,7 +2,6 @@ import React from 'react'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import {
-  Box,
   Container,
   Divider,
   Stack,
@@ -39,8 +38,8 @@ const Docs: MyPage<DocsProps> = ({ docs }) => {
         {docs.map(({title, contentLeft, contentRight}, i) => (
           <Stack
             key={`${i}${title.split(/\s/).join('-')}`}
-            direction={{ xs: 'column', lg: 'row' }}
-            spacing={{ xs: 2, lg: 4 }}
+            direction={{ xs: 'column', md: 'row' }}
+            spacing={{ xs: 2, md: 4 }}
           >
             <Container>
               <Typography variant='h5' gutterBottom>{title}</Typography>
@@ -50,9 +49,9 @@ const Docs: MyPage<DocsProps> = ({ docs }) => {
             </Container>
             <Container
               sx={{
-                position: { xs: 'static', lg: 'sticky' },
+                position: { xs: 'static', md: 'sticky' },
                 top: theme => theme.spacing(8),
-                alignSelf: { xs: 'auto', lg: 'flex-start' },
+                alignSelf: { xs: 'auto', md: 'flex-start' },
               }}
             >
               <Stack spacing={2}>

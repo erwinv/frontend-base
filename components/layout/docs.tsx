@@ -40,8 +40,8 @@ const DocsLayout: LayoutType = ({ themeSwitch, children }) => {
       <AppBar
         position='fixed'
         sx={{
-          width: { sm: `calc(100% - ${drawerProps.width}px)` },
-          ml: { sm: `${drawerProps.width}px` },
+          width: { lg: `calc(100% - ${drawerProps.width}px)` },
+          ml: { lg: `${drawerProps.width}px` },
         }}
       >
         <Container maxWidth={contentWidth}>
@@ -51,7 +51,7 @@ const DocsLayout: LayoutType = ({ themeSwitch, children }) => {
               onClick={() => drawerProps.setOpen(true)}
               edge='start'
               sx={{
-                display: { sm: 'none' },
+                display: { lg: 'none' },
               }}
             >
               <MenuIcon />
@@ -66,8 +66,8 @@ const DocsLayout: LayoutType = ({ themeSwitch, children }) => {
       </AppDrawer>
       <Box
         sx={{
-          width: { sm: `calc(100% - ${drawerProps.width}px)` },
-          ml: { sm: `${drawerProps.width}px` },
+          width: { lg: `calc(100% - ${drawerProps.width}px)` },
+          ml: { lg: `${drawerProps.width}px` },
         }}
       >
         <Container maxWidth={contentWidth}>

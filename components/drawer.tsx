@@ -43,7 +43,7 @@ const Drawer: React.FC<DrawerProps> = ({ menu, open, setOpen, width, variant, ch
       <MuiDrawer
         variant='permanent'
         sx={{
-          display: { xs: 'none', sm: 'block' },
+          display: { xs: 'none', lg: 'block' },
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width,
@@ -55,7 +55,7 @@ const Drawer: React.FC<DrawerProps> = ({ menu, open, setOpen, width, variant, ch
       </MuiDrawer>
       <SwipeableDrawer
         sx={{
-          display: { xs: 'block', sm: 'none' },
+          display: { xs: 'block', lg: 'none' },
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width,
