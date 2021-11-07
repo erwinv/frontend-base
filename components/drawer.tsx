@@ -5,6 +5,7 @@ import {
   Divider,
   Toolbar,
   SwipeableDrawer,
+  ToolbarProps,
 } from '@mui/material'
 import { NavMenu, Menu } from './menu'
 
@@ -17,6 +18,7 @@ interface DrawerProps {
   open: ReturnType<typeof useBool>[0]
   setOpen: ReturnType<typeof useBool>[1]
   width: number
+  variant?: ToolbarProps['variant']
 }
 
 export function useDrawer(width = drawerWidth): Omit<DrawerProps, 'menu'> {
@@ -24,15 +26,15 @@ export function useDrawer(width = drawerWidth): Omit<DrawerProps, 'menu'> {
   return { open, setOpen, width }
 }
 
-const Drawer: React.FC<DrawerProps> = ({ menu, open, setOpen, width, children }) => {
+const Drawer: React.FC<DrawerProps> = ({ menu, open, setOpen, width, variant, children }) => {
   const drawer = (
     <>
-      <Toolbar>
+      <Toolbar variant={variant}>
         <Box sx={{ flexGrow: 1}} />
         {children}
       </Toolbar>
       <Divider />
-      <NavMenu mainMenu={menu} />
+      <NavMenu mainMenu={menu} dense={variant === 'dense'} />
     </>
   )
 

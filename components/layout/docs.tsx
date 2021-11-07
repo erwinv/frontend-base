@@ -14,9 +14,6 @@ import AppDrawer, { useDrawer } from '../drawer'
 import { NextLinkComposed } from '../link'
 import { LayoutType } from './'
 import { LINKS as TOPNAV_PAGE_LINKS } from '../nav'
-import BackToTop from '../backToTop'
-
-const backToTopAnchorId = 'back-to-top-anchor'
 
 const DocsLayout: LayoutType = ({ themeSwitch, children }) => {
   const drawerProps = useDrawer()
@@ -41,14 +38,14 @@ const DocsLayout: LayoutType = ({ themeSwitch, children }) => {
   return (
     <>
       <AppBar
-        position='static'
+        position='fixed'
         sx={{
           width: { sm: `calc(100% - ${drawerProps.width}px)` },
           ml: { sm: `${drawerProps.width}px` },
         }}
       >
         <Container maxWidth={contentWidth}>
-          <Toolbar id={backToTopAnchorId}>
+          <Toolbar variant='dense'>
             <IconButton
               color='inherit'
               onClick={() => drawerProps.setOpen(true)}
@@ -64,7 +61,7 @@ const DocsLayout: LayoutType = ({ themeSwitch, children }) => {
           </Toolbar>
         </Container>
       </AppBar>
-      <AppDrawer menu={sideNavMenu} {...drawerProps}>
+      <AppDrawer menu={sideNavMenu} variant='dense' {...drawerProps}>
         {themeSwitch}
       </AppDrawer>
       <Box
@@ -74,10 +71,10 @@ const DocsLayout: LayoutType = ({ themeSwitch, children }) => {
         }}
       >
         <Container maxWidth={contentWidth}>
+          <Toolbar variant='dense' />
           <Box component='main'>
             {children}
           </Box>
-          <BackToTop anchorId={backToTopAnchorId} />
         </Container>
       </Box>
     </>

@@ -8,7 +8,9 @@ import {
 } from '@mui/material'
 import { NextLinkComposed } from '../link'
 import { LINKS as TOPNAV_PAGE_LINKS } from '../nav'
+import BackToTop from '../backToTop'
 
+const backToTopAnchorId = 'back-to-top-anchor'
 interface HomeLayoutProps {
   themeSwitch: React.ReactElement
 }
@@ -26,7 +28,7 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ themeSwitch, children }) => {
 
   return (
     <>
-      <AppBar position='sticky'>
+      <AppBar position='fixed'>
         <Container maxWidth={contentWidth}>
           <Toolbar>
             {themeSwitch}
@@ -36,10 +38,12 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ themeSwitch, children }) => {
         </Container>
       </AppBar>
       <Container maxWidth={contentWidth}>
+        <Toolbar id={backToTopAnchorId} />
         <Box component='main'>
           {children}
         </Box>
       </Container>
+      <BackToTop anchorId={backToTopAnchorId} />
     </>
   )
 }

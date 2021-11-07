@@ -18,11 +18,12 @@ type SubMenu = Omit<MenuItem, 'subMenu'>[]
 
 interface NavMenuProps {
   mainMenu: Menu
+  dense?: boolean
 }
 
-export const NavMenu: React.FC<NavMenuProps> = ({ mainMenu }) => {
+export const NavMenu: React.FC<NavMenuProps> = ({ mainMenu, dense = false }) => {
   return (
-    <List component='nav'>
+    <List component='nav' dense={dense} >
       {mainMenu.map(menuItem => <NavMenuItem key={kebabCase(menuItem.title)} menuItem={menuItem} />)}
     </List>
   )

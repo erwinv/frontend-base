@@ -51,7 +51,7 @@ const Docs: MyPage<DocsProps> = ({ docs }) => {
             <Container
               sx={{
                 position: { xs: 'static', lg: 'sticky' },
-                top: theme => theme.spacing(2),
+                top: theme => theme.spacing(8),
                 alignSelf: { xs: 'auto', lg: 'flex-start' },
               }}
             >
